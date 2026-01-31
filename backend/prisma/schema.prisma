@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Expense model - stores all expense entries
+model Expense {
+  id          String   @id @default(uuid())
+  amount      Int      // Stored in smallest currency unit (paise/cents) for precision
+  category    String   // Food, Transport, Shopping, Bills, Entertainment, Health, Other
+  description String
+  date        DateTime
+  createdAt   DateTime @default(now())
+
+  @@index([category])
+  @@index([date])
+}
+
+// IdempotencyKey model - prevents duplicate expense creation
+// Stores the mapping between idempotency keys and created expenses
+model IdempotencyKey {
+  key       String   @id
+  expenseId String
+  createdAt DateTime @default(now())
+
+  // Auto-cleanup: keys older than 24 hours can be deleted
+  // (handled by a cleanup job or manually)
+  
+  @@index([createdAt])
+}
