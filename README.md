@@ -49,9 +49,10 @@ expense-tracker/
 |------------|---------|
 | Node.js + Express | API Server |
 | TypeScript | Type safety |
-| SQLite + Prisma | Database + ORM |
+| PostgreSQL + Prisma | Database + ORM |
 | Decimal.js | Precise money calculations |
 | Zod | Runtime validation |
+| Jest | Testing |
 
 ### Frontend
 | Technology | Purpose |
@@ -60,6 +61,7 @@ expense-tracker/
 | TypeScript | Type safety |
 | React Query | Server state management |
 | Axios | HTTP client |
+| Vitest | Testing |
 
 ## 🎯 Key Design Decisions
 
